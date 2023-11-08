@@ -33,10 +33,9 @@ public class ClassCreationDialog extends JDialog {
     private void createClass() {
         String className = classNameField.getText().trim();
         if (!className.isEmpty()) {
-            // Créez une nouvelle instance de UMLClass et ajoutez-la au canvas
             UMLClasse newClass = new UMLClasse(className);
             canvas.addUMLClass(newClass);
-            dispose(); // Ferme le dialogue après la création
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Le nom de la classe ne peut pas être vide.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }

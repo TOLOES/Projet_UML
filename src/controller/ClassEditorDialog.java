@@ -2,7 +2,10 @@ package controller;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
 import model.UMLClasse;
+import model.UMLCanvas;
 
 public class ClassEditorDialog extends JDialog {
 
@@ -11,10 +14,12 @@ public class ClassEditorDialog extends JDialog {
     private final DefaultListModel<String> methodListModel;
     private final JList<String> attributeList;
     private final JList<String> methodList;
+    private final UMLCanvas canvas;
 
-    public ClassEditorDialog(JFrame owner, UMLClasse umlClass) {
+    public ClassEditorDialog(JFrame owner, UMLClasse umlClass, UMLCanvas canvas) {
         super(owner, "Edit UML Class", true);
         this.umlClass = umlClass;
+        this.canvas = canvas;
 
         attributeListModel = new DefaultListModel<>();
         methodListModel = new DefaultListModel<>();
@@ -38,6 +43,7 @@ public class ClassEditorDialog extends JDialog {
         attributesPanel.add(new JLabel("Attributes:"), BorderLayout.NORTH);
         attributesPanel.add(new JScrollPane(attributeList), BorderLayout.CENTER);
         JButton addAttributeButton = new JButton("Add Attribute");
+        addAttributeButton.addActionListener(e -> showAttributePopupMenu(addAttributeButton));
         attributesPanel.add(addAttributeButton, BorderLayout.SOUTH);
 
         // Methods panel
@@ -45,59 +51,70 @@ public class ClassEditorDialog extends JDialog {
         methodsPanel.add(new JLabel("Methods:"), BorderLayout.NORTH);
         methodsPanel.add(new JScrollPane(methodList), BorderLayout.CENTER);
         JButton addMethodButton = new JButton("Add Method");
+        addMethodButton.addActionListener(e -> showMethodPopupMenu(addMethodButton));
         methodsPanel.add(addMethodButton, BorderLayout.SOUTH);
+
+        // Validate button
+        JButton validateButton = new JButton("Validate");
+        validateButton.addActionListener(e -> validateChanges());
 
         // Add panels to dialog
         add(attributesPanel, BorderLayout.WEST);
-        add(methodsPanel, BorderLayout.EAST);
+        add(methodsPanel, BorderLayout.CENTER);
+        add(validateButton, BorderLayout.PAGE_END);
+    }
 
+    private void showAttributePopupMenu(JComponent component) {
+        JPopupMenu popupMenu = createAttributePopupMenu();
+        popupMenu.show(component, 0, component.getHeight());
+    }
 
+    private void showMethodPopupMenu(JComponent component) {
+        JPopupMenu popupMenu = createMethodPopupMenu();
+        popupMenu.show(component, 0, component.getHeight());
     }
 
     private void setupListeners() {
-        // Boutons pour les attributs
-        JButton addAttributeButton = new JButton("Ajouter");
-        JButton editAttributeButton = new JButton("Modifier");
-        JButton removeAttributeButton = new JButton("Supprimer");
+    }
 
-        // Boutons pour les méthodes
-        JButton addMethodButton = new JButton("Ajouter");
-        JButton editMethodButton = new JButton("Modifier");
-        JButton removeMethodButton = new JButton("Supprimer");
+    private JPopupMenu createAttributePopupMenu() {
+        JPopupMenu popupMenu = new JPopupMenu();
 
-        // Panel pour les boutons d'attributs
-        JPanel attributeButtonPanel = new JPanel();
-        attributeButtonPanel.add(addAttributeButton);
-        attributeButtonPanel.add(editAttributeButton);
-        attributeButtonPanel.add(removeAttributeButton);
+        JMenuItem addAttribute = new JMenuItem("Ajouter");
+        addAttribute.addActionListener(this::addAttribute);
+        popupMenu.add(addAttribute);
 
-        // Panel pour les boutons de méthodes
-        JPanel methodButtonPanel = new JPanel();
-        methodButtonPanel.add(addMethodButton);
-        methodButtonPanel.add(editMethodButton);
-        methodButtonPanel.add(removeMethodButton);
+        JMenuItem editAttribute = new JMenuItem("Modifier");
+        editAttribute.addActionListener(this::editAttribute);
+        popupMenu.add(editAttribute);
 
-        // Ajouter les action listeners pour les attributs
-        addAttributeButton.addActionListener(e -> addAttribute());
-        editAttributeButton.addActionListener(e -> editAttribute());
-        removeAttributeButton.addActionListener(e -> removeAttribute());
+        JMenuItem removeAttribute = new JMenuItem("Supprimer");
+        removeAttribute.addActionListener(this::removeAttribute);
+        popupMenu.add(removeAttribute);
 
-        // Ajouter les action listeners pour les méthodes
-        addMethodButton.addActionListener(e -> addMethod());
-        editMethodButton.addActionListener(e -> editMethod());
-        removeMethodButton.addActionListener(e -> removeMethod());
+        return popupMenu;
+    }
 
-        // Panel principal pour les boutons
-        JPanel mainButtonPanel = new JPanel(new BorderLayout());
-        mainButtonPanel.add(attributeButtonPanel, BorderLayout.NORTH);
-        mainButtonPanel.add(methodButtonPanel, BorderLayout.SOUTH);
+    private JPopupMenu createMethodPopupMenu() {
+        JPopupMenu popupMenu = new JPopupMenu();
 
-        // Ajouter le panel principal à la fenêtre
-        getContentPane().add(mainButtonPanel, BorderLayout.SOUTH);
+        JMenuItem addMethod = new JMenuItem("Ajouter");
+        addMethod.addActionListener(this::addMethod);
+        popupMenu.add(addMethod);
+
+        JMenuItem editMethod = new JMenuItem("Modifier");
+        editMethod.addActionListener(this::editMethod);
+        popupMenu.add(editMethod);
+
+        JMenuItem removeMethod = new JMenuItem("Supprimer");
+        removeMethod.addActionListener(this::removeMethod);
+        popupMenu.add(removeMethod);
+
+        return popupMenu;
     }
 
 
-    private void addAttribute() {
+    private void addAttribute(ActionEvent e) {
         JTextField nameField = new JTextField(10);
         JTextField typeField = new JTextField(10);
 
@@ -123,7 +140,7 @@ public class ClassEditorDialog extends JDialog {
     }
 
 
-    private void editAttribute() {
+    private void editAttribute(ActionEvent e) {
         int selectedIndex = attributeList.getSelectedIndex();
         if (selectedIndex != -1) {
             String currentAttribute = attributeListModel.getElementAt(selectedIndex);
@@ -137,17 +154,17 @@ public class ClassEditorDialog extends JDialog {
         }
     }
 
-    private void removeAttribute() {
+    private void removeAttribute(ActionEvent e) {
         int selectedIndex = attributeList.getSelectedIndex();
         if (selectedIndex != -1) {
-            umlClass.removeAttribute(String.valueOf(selectedIndex));
+            umlClass.removeAttribute((selectedIndex));
             attributeListModel.remove(selectedIndex);
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner un attribut à supprimer.");
         }
     }
 
-    private void addMethod() {
+    private void addMethod(ActionEvent e) {
         JTextField nameField = new JTextField(10);
         JTextField returnTypeField = new JTextField(10);
 
@@ -173,7 +190,7 @@ public class ClassEditorDialog extends JDialog {
     }
 
 
-    private void editMethod() {
+    private void editMethod(ActionEvent e) {
         int selectedIndex = methodList.getSelectedIndex();
         if (selectedIndex != -1) {
             String currentMethod = methodListModel.getElementAt(selectedIndex);
@@ -187,14 +204,21 @@ public class ClassEditorDialog extends JDialog {
         }
     }
 
-    private void removeMethod() {
+    private void removeMethod(ActionEvent e) {
         int selectedIndex = methodList.getSelectedIndex();
         if (selectedIndex != -1) {
-            umlClass.removeMethod(String.valueOf(selectedIndex));
+            umlClass.removeMethod((selectedIndex));
             methodListModel.remove(selectedIndex);
         } else {
             JOptionPane.showMessageDialog(this, "Veuillez sélectionner une méthode à supprimer.");
         }
+    }
+
+    private void validateChanges() {
+        if (canvas != null) {
+            canvas.redrawCanvas(umlClass);
+        }
+        dispose();
     }
 
 }

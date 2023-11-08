@@ -23,36 +23,48 @@ public class UMLCanvas extends JPanel {
         repaint();
     }
 
-    // Dans UMLCanvas.java
+    public void redrawCanvas(UMLClasse umlClass) {
+        for (int i = 0; i < umlClasses.size(); i++) {
+            UMLClasse existingClass = umlClasses.get(i);
+            if (existingClass.getName().equals(umlClass.getName())) {
+                umlClasses.set(i, umlClass);
+                break;
+            }
+        }
+        repaint();
+    }
+
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        // Dessiner les classes ici
-        int x = 10; // Décalage initial horizontal
         for (UMLClasse umlClass : umlClasses) {
-            int y = 30; // Décalage initial vertical
-            int classHeight = 20 + (umlClass.getAttributes().size() + umlClass.getMethods().size()) * 15;
-            g.drawRect(x, y, 200, classHeight); // Ajustez la largeur si nécessaire
-            g.drawString(umlClass.getName(), x + 5, y + 15);
-            y += 20;
-
-            for (String attribute : umlClass.getAttributes()) {
-                g.drawString(attribute, x + 5, y);
-                y += 15;
-            }
-
-            y += 5; // Un petit espace entre les attributs et les méthodes
-
-            for (String method : umlClass.getMethods()) {
-                g.drawString(method, x + 5, y);
-                y += 15;
-            }
-
-            x += 210; // Espacement pour la prochaine classe, ajustez selon la largeur
+            drawUMLClass(g, umlClass);
         }
     }
 
+    private void drawUMLClass(Graphics g, UMLClasse umlClass) {
+
+        int x = 10;
+        int y = 10;
+
+        g.drawRect(x, y, 150, 20);
+        g.drawString(umlClass.getName(), x + 5, y + 15);
+
+        y += 25;
+        for (String attribute : umlClass.getAttributes()) {
+            g.drawString(attribute, x + 5, y);
+            y += 15;
+        }
+
+        y += 25;
+        for (String method : umlClass.getMethods()) {
+            g.drawString(method, x + 5, y);
+            y += 15;
+        }
+    }
 }
+
 
 
 

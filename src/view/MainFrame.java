@@ -33,7 +33,7 @@ public class MainFrame extends JFrame {
         if (className != null && !className.trim().isEmpty()) {
             UMLClasse umlClass = new UMLClasse(className.trim());
             canvas.addUMLClass(umlClass);
-            ClassEditorDialog editorDialog = new ClassEditorDialog(this, umlClass);
+            ClassEditorDialog editorDialog = new ClassEditorDialog(this, umlClass, canvas);
             editorDialog.setVisible(true);
         }
     }
