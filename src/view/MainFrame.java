@@ -31,7 +31,9 @@ public class MainFrame extends JFrame {
     private void createClass(UMLCanvas canvas) {
         String className = JOptionPane.showInputDialog(this, "Nom de la classe:");
         if (className != null && !className.trim().isEmpty()) {
-            UMLClasse umlClass = new UMLClasse(className.trim());
+            int x = 50;
+            int y = 50;
+            UMLClasse umlClass = new UMLClasse(className.trim(), x, y);
             canvas.addUMLClass(umlClass);
             ClassEditorDialog editorDialog = new ClassEditorDialog(this, umlClass, canvas);
             editorDialog.setVisible(true);
