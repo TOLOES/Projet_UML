@@ -1,32 +1,41 @@
 package view;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+
+import javax.swing.*;
+
+import model.UMLCanvas;
+import model.UMLClasse;
+import controller.ClassEditorDialog;
 
 public class MainFrame extends JFrame {
 
-    public MainFrame(String title) {
-        super(title); // Appel du constructeur de la superclasse JFrame avec le titre de la fenêtre
-
-        // Configuration de la fermeture de l'application
+    public MainFrame(String title, UMLCanvas canvas) {
+        super(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Définition de la taille de la fenêtre
         setSize(800, 600);
-
-        // Positionnement de la fenêtre au centre de l'écran
         setLocationRelativeTo(null);
+        initMenuBar(canvas);
     }
 
-    public static void main(String[] args) {
-        // S'assurer que la tâche de création de l'interface utilisateur est effectuée dans le thread de distribution des événements (EDT)
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                // Création de la fenêtre principale
-                MainFrame frame = new MainFrame("UML Modeller");
+    private void initMenuBar(UMLCanvas canvas) {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("Fichier");
 
-                // Rendre la fenêtre visible
-                frame.setVisible(true);
-            }
-        });
+        JMenuItem createClassItem = new JMenuItem("Créer une classe");
+        createClassItem.addActionListener(e -> createClass(canvas));
+
+        fileMenu.add(createClassItem);
+        menuBar.add(fileMenu);
+        setJMenuBar(menuBar);
+    }
+
+    private void createClass(UMLCanvas canvas) {
+        String className = JOptionPane.showInputDialog(this, "Nom de la classe:");
+        if (className != null && !className.trim().isEmpty()) {
+            UMLClasse umlClass = new UMLClasse(className.trim());
+            canvas.addUMLClass(umlClass);
+            ClassEditorDialog editorDialog = new ClassEditorDialog(this, umlClass, canvas);
+            editorDialog.setVisible(true);
+        }
     }
 }
+
