@@ -11,7 +11,5 @@ H
 src/model/UMLCanvas.java,b\0\b042133cda7874e07cf1b9b33a0343c782358733
 W
 'src/controller/ClassCreationDialog.java,8\a\8a2dcf66eab7fd0fe2f3171b7169c2b30d105052
-V
-&src/controller/ClassEditorControl.java,4\d\4df5d872576d2bc8f00a3e4bbe3004878663e85f
 U
 %src/controller/ClassEditorDialog.java,1\9\190194ed9bff94425d6793c2fe0906cfb8a7d545

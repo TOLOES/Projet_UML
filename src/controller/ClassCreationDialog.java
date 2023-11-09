@@ -1,4 +1,4 @@
-package controller;
+/*package controller;
 
 import javax.swing.*;
 import model.UMLCanvas;
@@ -33,7 +33,9 @@ public class ClassCreationDialog extends JDialog {
     private void createClass() {
         String className = classNameField.getText().trim();
         if (!className.isEmpty()) {
-            UMLClasse newClass = new UMLClasse(className);
+            int x = 50;
+            int y = 50;
+            UMLClasse newClass = new UMLClasse(className, x, y);
             canvas.addUMLClass(newClass);
             dispose();
         } else {
@@ -42,3 +44,4 @@ public class ClassCreationDialog extends JDialog {
     }
 
 }
+*/
