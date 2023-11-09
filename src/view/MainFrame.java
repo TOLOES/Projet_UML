@@ -23,7 +23,11 @@ public class MainFrame extends JFrame {
         JMenuItem createClassItem = new JMenuItem("Créer une classe");
         createClassItem.addActionListener(e -> createClass(canvas));
 
+        JMenuItem deleteClassItem = new JMenuItem("Supprimer une classe");
+        deleteClassItem.addActionListener(e -> deleteClass(canvas));
+
         fileMenu.add(createClassItem);
+        fileMenu.add(deleteClassItem);
         menuBar.add(fileMenu);
         setJMenuBar(menuBar);
     }
@@ -37,6 +41,18 @@ public class MainFrame extends JFrame {
             canvas.addUMLClass(umlClass);
             ClassEditorDialog editorDialog = new ClassEditorDialog(this, umlClass, canvas);
             editorDialog.setVisible(true);
+        }
+    }
+
+    private void deleteClass(UMLCanvas canvas) {
+        String className = JOptionPane.showInputDialog(this, "Nom de la classe à supprimer:");
+        if (className != null && !className.trim().isEmpty()) {
+            UMLClasse umlClass = canvas.findUMLClasseByName(className.trim());
+            if (umlClass != null) {
+                canvas.removeUMLClass(umlClass);
+            } else {
+                JOptionPane.showMessageDialog(this, "Aucune classe trouvée avec le nom : " + className, "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 }

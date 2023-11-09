@@ -1,5 +1,7 @@
 package model;
 
+import controller.ClassEditorDialog;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -42,8 +44,17 @@ public class UMLCanvas extends JPanel {
         MouseAdapter mouseAdapter = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                selectedClass = findClassAt(e.getPoint());
-                lastMousePosition = e.getPoint();
+                if (e.getClickCount() == 2) {
+                    UMLClasse clickedClass = findClassAt(e.getPoint());
+                    if (clickedClass != null) {
+                        JFrame frameAncestor = (JFrame) SwingUtilities.getWindowAncestor(UMLCanvas.this);
+                        ClassEditorDialog editorDialog = new ClassEditorDialog(frameAncestor, clickedClass, UMLCanvas.this);
+                        editorDialog.setVisible(true);
+                    }
+                } else {
+                    selectedClass = findClassAt(e.getPoint());
+                    lastMousePosition = e.getPoint();
+                }
             }
 
             @Override
@@ -90,6 +101,15 @@ public class UMLCanvas extends JPanel {
         return null;
     }
 
+    public UMLClasse findUMLClasseByName(String name) {
+        for (UMLClasse umlClass : umlClasses) {
+            if (umlClass.getName().equalsIgnoreCase(name)) {
+                return umlClass;
+            }
+        }
+        return null;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -103,7 +123,7 @@ public class UMLCanvas extends JPanel {
         int maxWidth = 150;
         int lineHeight = metrics.getHeight();
 
-        // Calculr la largeur maximale nécessaire pour le texte
+        // Calcule la largeur maximale nécessaire pour le texte
         for (String attribute : umlClass.getAttributes()) {
             maxWidth = Math.max(maxWidth, metrics.stringWidth(attribute) + 10);
         }
