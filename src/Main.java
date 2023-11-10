@@ -9,7 +9,7 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             UMLCanvas canvas = new UMLCanvas();
             MainFrame mainFrame = new MainFrame("UML Modeller", canvas);
-            mainFrame.add(canvas); // Ajouter le canvas à la fenêtre principale
+            mainFrame.add(canvas);
             mainFrame.setVisible(true);
         });
     }
