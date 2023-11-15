@@ -281,32 +281,51 @@ public class UMLCanvas extends JPanel {
         UMLClasse source = relation.getSource();
         UMLClasse destination = relation.getDestination();
 
-        int sourceX = source.getX() + 150 / 2;
-        int sourceY = source.getY() + calculateClassHeight(source, g) / 2;
-        int destX = destination.getX() + 150 / 2;
-        int destY = destination.getY() + calculateClassHeight(destination, g) / 2;
+        // Calcule les points de départ et d'arrivée en fonction de la position des classes
+        Point startPoint = getBorderPoint(source, destination, g);
+        Point endPoint = getBorderPoint(destination, source, g);
 
-        // Dessiner la ligne entre les classes
-        g.drawLine(sourceX, sourceY, destX, destY);
-
+        // Dessine la ligne entre les points calculés
+        g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
 
         switch (relation.getType()) {
             case AGGREGATION:
-                drawDiamond(g, destX, destY, false);
+                drawDiamond(g, endPoint.x, endPoint.y, false); // Losange vide pour l'agrégation
                 break;
             case COMPOSITION:
-                drawDiamond(g, destX, destY, true);
+                drawDiamond(g, endPoint.x, endPoint.y, true); // Losange plein pour la composition
                 break;
             case INHERITANCE:
-                drawArrow(g, sourceX, sourceY, destX, destY);
+                drawArrow(g, startPoint.x, startPoint.y, endPoint.x, endPoint.y); // Flèche pour l'héritage
                 break;
             case ASSOCIATION:
                 break;
         }
 
         // Dessine les cardinalités
-        drawCardinality(g, sourceX, sourceY, relation.getSourceCardinality());
-        drawCardinality(g, destX, destY, relation.getDestinationCardinality());
+        drawCardinality(g, startPoint.x, startPoint.y, relation.getSourceCardinality());
+        drawCardinality(g, endPoint.x, endPoint.y, relation.getDestinationCardinality());
+    }
+
+    private Point getBorderPoint(UMLClasse umlClass, UMLClasse otherClass, Graphics g) {
+        int x = umlClass.getX();
+        int y = umlClass.getY();
+        int width = 150;
+        int height = calculateClassHeight(umlClass, g);
+
+        int otherCenterX = otherClass.getX() + width / 2;
+        int otherCenterY = otherClass.getY() + calculateClassHeight(otherClass, g) / 2;
+
+        // Détermine le point de bord en fonction de la position de l'autre classe
+        if (otherCenterY < y) { // classe est au-dessus
+            return new Point(x + width / 2, y); // Milieu du bord supérieur
+        } else if (otherCenterY > y + height) { //classe est en dessous
+            return new Point(x + width / 2, y + height); // Milieu du bord inférieur
+        } else if (otherCenterX < x) { //classe est à gauche
+            return new Point(x, y + height / 2); // Milieu du bord gauche
+        } else { //classe est à droite
+            return new Point(x + width, y + height / 2); // Milieu du bord droit
+        }
     }
 
     private void drawArrow(Graphics g, int x1, int y1, int x2, int y2) {
