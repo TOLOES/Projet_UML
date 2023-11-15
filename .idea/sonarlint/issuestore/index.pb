@@ -13,3 +13,5 @@ W
 'src/controller/ClassCreationDialog.java,8\a\8a2dcf66eab7fd0fe2f3171b7169c2b30d105052
 U
 %src/controller/ClassEditorDialog.java,1\9\190194ed9bff94425d6793c2fe0906cfb8a7d545
+J
+src/model/UMLRelation.java,0\6\06be91da2ab25a4bbdbf636b94293391b23ba68f

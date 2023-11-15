@@ -1,7 +1,30 @@
 
+s	java:S117Ñ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8Û²Â»1
+e
+java:S2184Ñ"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8Û²Â»1
 I
-java:S1948",Make "umlClasses" transient or serializable.(¹şìç8¶ùÛ©»1
+java:S1948",Make "umlClasses" transient or serializable.(¹şìç8û²Â»1
+P
+java:S1948".Make "umlRelations" transient or serializable.(€×Öşÿÿÿÿ8û²Â»1
 Q
-java:S1948"/Make "selectedClass" transient or serializable.(Ù„Áıÿÿÿÿ8·ùÛ©»1
+java:S1948"/Make "selectedClass" transient or serializable.(Ù„Áıÿÿÿÿ8û²Â»1
+V
+java:S1948"4Make "firstSelectedClass" transient or serializable.(¶Ì»úÿÿÿÿ8û²Â»1
+W
+java:S1948"5Make "secondSelectedClass" transient or serializable.(†¡½Ëşÿÿÿÿ8û²Â»1
+o
+java:S3776P"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(µºš8û²Â»1
+\
+java:S1161s":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8û²Â»1
+^
+java:S1117u"ARename "selectedClass" which hides the field declared at line 16.(—Ç›â8û²Â»1
 ?
-java:S1116©"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8ÆùÛ©»1
+java:S1116•"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8Š³Â»1
+>
+java:S1659Ğ" Declare "dy" on a separate line.(…ÆõÔ8µœÂ»1
+b
+java:S1659Ò"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8’³Â»1
+D
+java:S1659Ó"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8ÅœÂ»1
+\
+java:S1128	":Remove this unused import 'java.awt.geom.AffineTransform'.(˜ÊÊ¡ıÿÿÿÿ8¨š¹½1
