@@ -23,6 +23,9 @@ public class MainFrame extends JFrame {
         JMenuItem createClassItem = new JMenuItem("Créer une classe");
         createClassItem.addActionListener(e -> createClass(canvas));
 
+        JMenuItem editClassItem = new JMenuItem("Modifier une classe");
+        editClassItem.addActionListener(e -> editClass(canvas));
+
         JMenuItem deleteClassItem = new JMenuItem("Supprimer une classe");
         deleteClassItem.addActionListener(e -> deleteClass(canvas));
 
@@ -30,6 +33,7 @@ public class MainFrame extends JFrame {
         createRelationItem.addActionListener(e -> canvas.startCreatingRelation());
 
         fileMenu.add(createClassItem);
+        fileMenu.add(editClassItem);
         fileMenu.add(deleteClassItem);
         fileMenu.add(createRelationItem);
         menuBar.add(fileMenu);
@@ -45,6 +49,22 @@ public class MainFrame extends JFrame {
             canvas.addUMLClass(umlClass);
             ClassEditorDialog editorDialog = new ClassEditorDialog(this, umlClass, canvas);
             editorDialog.setVisible(true);
+        }
+    }
+
+    private void editClass(UMLCanvas canvas) {
+        String className = JOptionPane.showInputDialog(this, "Nom de la classe à modifier:");
+        if (className != null && !className.trim().isEmpty()) {
+            UMLClasse umlClass = canvas.findUMLClasseByName(className.trim());
+            if (umlClass != null) {
+                String newName = JOptionPane.showInputDialog(this, "Entrez le nouveau nom pour la classe " + className + ":");
+                if (newName != null && !newName.trim().isEmpty()) {
+                    umlClass.setName(newName.trim());
+                    canvas.repaint();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Aucune classe trouvée avec le nom : " + className, "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
