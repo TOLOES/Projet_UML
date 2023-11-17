@@ -60,5 +60,8 @@ public class UMLRelation {
         return type;
     }
 
+    public RelationType setType(RelationType type) {
+        return this.type = type;
+    }
 }
 

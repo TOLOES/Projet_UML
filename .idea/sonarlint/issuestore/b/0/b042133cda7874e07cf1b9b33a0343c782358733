@@ -1,11 +1,11 @@
 
-s	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8…„ä½1
+s	java:S117°"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8…„ä½1
 c
-java:S2184¯"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
+java:S2184¶"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
 c
-java:S2184¯"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
+java:S2184¶"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
 e
-java:S2184"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8…„ä½1
+java:S2184°"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8…„ä½1
 I
 java:S1948",Make "umlClasses" transient or serializable.(¹şìç8éˆ„ä½1
 P
@@ -17,16 +17,16 @@ java:S1948"4Make "firstSelectedClass" transient or serializable.(¶Ì»úÿÿÿÿ8éˆ
 W
 java:S1948"5Make "secondSelectedClass" transient or serializable.(†¡½Ëşÿÿÿÿ8éˆ„ä½1
 o
-java:S3776`"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(µºš8ˆ‰„ä½1
+java:S3776`"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(µºš8ˆ‰„ä½1
 ]
 java:S1161ƒ":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8™‰„ä½1
 _
 java:S1117…"ARename "selectedClass" which hides the field declared at line 15.(—Ç›â8™‰„ä½1
 ?
-java:S1116Ó"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8Ç‰„ä½1
+java:S1116ô"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8Ç‰„ä½1
 >
-java:S1659" Declare "dy" on a separate line.(…ÆõÔ8Ç‰„ä½1
+java:S1659¯" Declare "dy" on a separate line.(…ÆõÔ8Ç‰„ä½1
 b
-java:S1659"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8Ç‰„ä½1
+java:S1659±"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8Ç‰„ä½1
 D
-java:S1659‘"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8Ó¯—ä½1
+java:S1659²"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8Ó¯—ä½1

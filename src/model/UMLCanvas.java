@@ -149,6 +149,13 @@ public class UMLCanvas extends JPanel {
                         setCursor(Cursor.getDefaultCursor());
                     }
                 }
+
+                if (e.getClickCount() == 2 && !isDeletingRelation) {
+                    UMLRelation clickedRelation = findRelationAt(e.getPoint());
+                    if (clickedRelation != null) {
+                        editRelation(clickedRelation);
+                    }
+                }
             }
         };
 
@@ -210,6 +217,32 @@ public class UMLCanvas extends JPanel {
 
 
         resetRelationCreation();
+    }
+
+    private void editRelation(UMLRelation relation) {
+
+        JComboBox<UMLRelation.RelationType> typeComboBox = new JComboBox<>(UMLRelation.RelationType.values());
+        JTextField sourceCardinalityField = new JTextField(relation.getSourceCardinality(), 10);
+        JTextField destinationCardinalityField = new JTextField(relation.getDestinationCardinality(), 10);
+
+        typeComboBox.setSelectedItem(relation.getType());
+
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Type de relation:"));
+        panel.add(typeComboBox);
+        panel.add(new JLabel("Cardinalité source:"));
+        panel.add(sourceCardinalityField);
+        panel.add(new JLabel("Cardinalité destination:"));
+        panel.add(destinationCardinalityField);
+
+        // Affiche la boîte de dialogue
+        int result = JOptionPane.showConfirmDialog(this, panel, "Modifier la relation", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            relation.setType((UMLRelation.RelationType) typeComboBox.getSelectedItem());
+            relation.setSourceCardinality(sourceCardinalityField.getText());
+            relation.setDestinationCardinality(destinationCardinalityField.getText());
+            repaint();
+        }
     }
 
     private void resetRelationCreation() {
