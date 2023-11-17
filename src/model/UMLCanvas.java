@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,10 +14,13 @@ public class UMLCanvas extends JPanel {
     private List<UMLRelation> umlRelations;
     private UMLClasse selectedClass;
     private Point lastMousePosition;
+    private boolean showTemporaryMessage = false;
+    private String temporaryMessage = "";
 
     private boolean isCreatingRelation = false;
     private UMLClasse firstSelectedClass;
     private UMLClasse secondSelectedClass;
+    private boolean isDeletingRelation = false;
 
     public UMLCanvas() {
         this.umlClasses = new ArrayList<>();
@@ -30,9 +32,8 @@ public class UMLCanvas extends JPanel {
         isCreatingRelation = true;
         firstSelectedClass = null;
         secondSelectedClass = null;
-        // Peut-être changer le curseur ou ajouter un label temporaire pour indiquer à l'utilisateur de sélectionner une classe
         setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
-        // Réinitialiser la sélection si l'utilisateur clique ailleurs
+        // Réinitialise la sélection si l'utilisateur clique ailleurs
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -44,6 +45,21 @@ public class UMLCanvas extends JPanel {
         repaint();
     }
 
+    public void startDeletingRelation() {
+        isDeletingRelation = true;
+        showTemporaryMessage = true;
+        temporaryMessage = "Cliquez sur une relation pour la supprimer.";
+
+        setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+        repaint();
+
+        Timer timer = new Timer(3000, e -> {
+            showTemporaryMessage = false;
+            repaint();
+        });
+        timer.setRepeats(false);
+        timer.start();
+    }
 
 
     public void addUMLClass(UMLClasse umlClass) {
@@ -124,11 +140,41 @@ public class UMLCanvas extends JPanel {
                         }
                     }
                 }
+                if (isDeletingRelation) {
+                    UMLRelation relation = findRelationAt(e.getPoint());
+                    if (relation != null) {
+                        umlRelations.remove(relation);
+                        repaint();
+                        isDeletingRelation = false;
+                        setCursor(Cursor.getDefaultCursor());
+                    }
+                }
             }
         };
 
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
+    }
+
+
+    private UMLRelation findRelationAt(Point point) {
+        final double TOLERANCE = 10.0; // Tolérance pour la proximité du point à la ligne
+
+        for (UMLRelation relation : umlRelations) {
+            Point startPoint = getBorderPoint(relation.getSource(), relation.getDestination(), getGraphics());
+            Point endPoint = getBorderPoint(relation.getDestination(), relation.getSource(), getGraphics());
+
+            if (isPointNearLine(point, startPoint, endPoint, TOLERANCE)) {
+                return relation;
+            }
+        }
+        return null;
+    }
+
+    private boolean isPointNearLine(Point p, Point lineStart, Point lineEnd, double tolerance) {
+        double normalLength = Math.hypot(lineEnd.x - lineStart.x, lineEnd.y - lineStart.y);
+        double distance = Math.abs((p.x - lineStart.x) * (lineEnd.y - lineStart.y) - (p.y - lineStart.y) * (lineEnd.x - lineStart.x)) / normalLength;
+        return distance <= tolerance;
     }
 
     private void askForRelationDetails() {
@@ -177,19 +223,19 @@ public class UMLCanvas extends JPanel {
     private int calculateClassHeight(UMLClasse umlClass, Graphics g) {
         FontMetrics metrics = g.getFontMetrics();
         int lineHeight = metrics.getHeight();
-        int headerHeight = lineHeight + 5; // Hauteur pour le nom de la classe + un peu d'espace
+        int headerHeight = lineHeight + 5;
 
-        // Calculez la hauteur totale en fonction du nombre d'attributs et de méthodes
+        // Calcule la hauteur totale en fonction du nombre d'attributs et de méthodes
         int attributesHeight = umlClass.getAttributes().size() * lineHeight;
         int methodsHeight = umlClass.getMethods().size() * lineHeight;
 
-        // Ajoutez de l'espace supplémentaire pour la séparation entre le nom, les attributs et les méthodes
+        // Ajoute de l'espace supplémentaire pour la séparation entre le nom, les attributs et les méthodes
         int totalHeight = headerHeight + attributesHeight + methodsHeight;
         if (!umlClass.getAttributes().isEmpty()) {
-            totalHeight += 5; // Espace supplémentaire si la classe a des attributs
+            totalHeight += 5;
         }
         if (!umlClass.getMethods().isEmpty()) {
-            totalHeight += 5; // Espace supplémentaire si la classe a des méthodes
+            totalHeight += 5;
         }
 
         return totalHeight;
@@ -224,6 +270,22 @@ public class UMLCanvas extends JPanel {
         for (UMLRelation relation : umlRelations) {
             drawUMLRelation(g, relation);
         }
+
+        if (showTemporaryMessage) {
+            drawCenteredTopMessage(g, temporaryMessage);
+        }
+    }
+
+
+    private void drawCenteredTopMessage(Graphics g, String message) {
+        FontMetrics fm = g.getFontMetrics();
+        int messageWidth = fm.stringWidth(message);
+
+        int x = (getWidth() - messageWidth) / 2;
+        int y = fm.getHeight();
+
+        g.setColor(Color.BLACK);
+        g.drawString(message, x, y);
     }
 
     private void drawUMLClass(Graphics g, UMLClasse umlClass) {

@@ -29,14 +29,21 @@ public class MainFrame extends JFrame {
         JMenuItem deleteClassItem = new JMenuItem("Supprimer une classe");
         deleteClassItem.addActionListener(e -> deleteClass(canvas));
 
+        JMenu editMenu = new JMenu("Édition");
+
+        JMenuItem deleteRelationItem = new JMenuItem("Supprimer une relation");
+        deleteRelationItem.addActionListener(e -> canvas.startDeletingRelation());
+
         JMenuItem createRelationItem = new JMenuItem("Ajouter une relation");
         createRelationItem.addActionListener(e -> canvas.startCreatingRelation());
 
         fileMenu.add(createClassItem);
         fileMenu.add(editClassItem);
         fileMenu.add(deleteClassItem);
-        fileMenu.add(createRelationItem);
+        editMenu.add(createRelationItem);
+        editMenu.add(deleteRelationItem);
         menuBar.add(fileMenu);
+        menuBar.add(editMenu);
         setJMenuBar(menuBar);
     }
 
