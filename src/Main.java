@@ -2,8 +2,9 @@ import model.UMLCanvas;
 import view.MainFrame;
 
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Main {
+public class Main implements Serializable{
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

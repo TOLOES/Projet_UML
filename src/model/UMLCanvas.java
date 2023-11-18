@@ -6,11 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UMLCanvas extends JPanel {
-    private final List<UMLClasse> umlClasses;
+public class UMLCanvas extends JPanel implements Serializable   {
+    private List<UMLClasse> umlClasses;
     private List<UMLRelation> umlRelations;
     private UMLClasse selectedClass;
     private Point lastMousePosition;
@@ -26,6 +27,28 @@ public class UMLCanvas extends JPanel {
         this.umlClasses = new ArrayList<>();
         this.umlRelations = new ArrayList<>();
         setupMouseListeners();
+    }
+
+    public void saveSchema(File file) {
+        try (FileOutputStream fileOut = new FileOutputStream(file);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(umlClasses);
+            out.writeObject(umlRelations);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void loadSchema(String filePath) {
+        try (FileInputStream fileIn = new FileInputStream(filePath);
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            umlClasses = (List<UMLClasse>) in.readObject();
+            umlRelations = (List<UMLRelation>) in.readObject();
+            repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void startCreatingRelation() {
@@ -149,6 +172,13 @@ public class UMLCanvas extends JPanel {
                         setCursor(Cursor.getDefaultCursor());
                     }
                 }
+
+                if (e.getClickCount() == 2 && !isDeletingRelation) {
+                    UMLRelation clickedRelation = findRelationAt(e.getPoint());
+                    if (clickedRelation != null) {
+                        editRelation(clickedRelation);
+                    }
+                }
             }
         };
 
@@ -210,6 +240,32 @@ public class UMLCanvas extends JPanel {
 
 
         resetRelationCreation();
+    }
+
+    private void editRelation(UMLRelation relation) {
+
+        JComboBox<UMLRelation.RelationType> typeComboBox = new JComboBox<>(UMLRelation.RelationType.values());
+        JTextField sourceCardinalityField = new JTextField(relation.getSourceCardinality(), 10);
+        JTextField destinationCardinalityField = new JTextField(relation.getDestinationCardinality(), 10);
+
+        typeComboBox.setSelectedItem(relation.getType());
+
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Type de relation:"));
+        panel.add(typeComboBox);
+        panel.add(new JLabel("Cardinalité source:"));
+        panel.add(sourceCardinalityField);
+        panel.add(new JLabel("Cardinalité destination:"));
+        panel.add(destinationCardinalityField);
+
+        // Affiche la boîte de dialogue
+        int result = JOptionPane.showConfirmDialog(this, panel, "Modifier la relation", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            relation.setType((UMLRelation.RelationType) typeComboBox.getSelectedItem());
+            relation.setSourceCardinality(sourceCardinalityField.getText());
+            relation.setDestinationCardinality(destinationCardinalityField.getText());
+            repaint();
+        }
     }
 
     private void resetRelationCreation() {
@@ -350,6 +406,7 @@ public class UMLCanvas extends JPanel {
         // Dessine la ligne entre les points calculés
         g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
 
+        // Dessin des types de relation
         switch (relation.getType()) {
             case AGGREGATION:
                 drawDiamond(g, endPoint.x, endPoint.y, false); // Losange vide pour l'agrégation
@@ -364,9 +421,13 @@ public class UMLCanvas extends JPanel {
                 break;
         }
 
+        // Calcule les points pour les cardinalités
+        Point midStartPoint = new Point((startPoint.x * 3 + endPoint.x) / 4, (startPoint.y * 3 + endPoint.y) / 4);
+        Point midEndPoint = new Point((endPoint.x * 3 + startPoint.x) / 4, (endPoint.y * 3 + startPoint.y) / 4);
+
         // Dessine les cardinalités
-        drawCardinality(g, startPoint.x, startPoint.y, relation.getSourceCardinality());
-        drawCardinality(g, endPoint.x, endPoint.y, relation.getDestinationCardinality());
+        drawCardinality(g, midStartPoint.x, midStartPoint.y, relation.getSourceCardinality());
+        drawCardinality(g, midEndPoint.x, midEndPoint.y, relation.getDestinationCardinality());
     }
 
     private Point getBorderPoint(UMLClasse umlClass, UMLClasse otherClass, Graphics g) {

@@ -1,3 +1,7 @@
 
-B
-java:S1128"%Remove this unused import 'java.awt'.(ï´µ©8ÿˆ‰Â»1
+P
+java:S11218".Extract the assignment out of this expression.(Ş¸‰Šşÿÿÿÿ8ü¬¡¾1
+E
+java:S1948"(Make "source" transient or serializable.(üòÛ±8ü¬¡¾1
+O
+java:S1948"-Make "destination" transient or serializable.(â«ãÏüÿÿÿÿ8ü¬¡¾1

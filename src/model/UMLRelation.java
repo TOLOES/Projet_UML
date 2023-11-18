@@ -1,8 +1,8 @@
 package model;
 
-import java.awt.*;
+import java.io.Serializable;
 
-public class UMLRelation {
+public class UMLRelation implements Serializable {
     private UMLClasse source;
     private UMLClasse destination;
     private String sourceCardinality;
@@ -28,16 +28,8 @@ public class UMLRelation {
         return source;
     }
 
-    public void setSource(UMLClasse source) {
-        this.source = source;
-    }
-
     public UMLClasse getDestination() {
         return destination;
-    }
-
-    public void setDestination(UMLClasse destination) {
-        this.destination = destination;
     }
 
     public String getSourceCardinality() {
@@ -60,5 +52,8 @@ public class UMLRelation {
         return type;
     }
 
+    public RelationType setType(RelationType type) {
+        return this.type = type;
+    }
 }
 

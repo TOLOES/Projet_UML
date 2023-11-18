@@ -2,8 +2,9 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.Serializable;
 
-public class UMLClasse {
+public class UMLClasse implements Serializable{
     private  int x;
     private  int y;
     private String name;

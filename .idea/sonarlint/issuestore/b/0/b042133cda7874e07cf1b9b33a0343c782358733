@@ -1,32 +1,22 @@
 
-s	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8…„ä½1
+s	java:S117Ì"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8Ü˜¡¾1
 c
-java:S2184¯"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
+java:S2184Í"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8æ˜¡¾1
 c
-java:S2184¯"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
+java:S2184Í"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8ç˜¡¾1
 e
-java:S2184"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8…„ä½1
-I
-java:S1948",Make "umlClasses" transient or serializable.(¹şìç8éˆ„ä½1
-P
-java:S1948".Make "umlRelations" transient or serializable.(€×Öşÿÿÿÿ8éˆ„ä½1
-Q
-java:S1948"/Make "selectedClass" transient or serializable.(Ù„Áıÿÿÿÿ8éˆ„ä½1
-V
-java:S1948"4Make "firstSelectedClass" transient or serializable.(¶Ì»úÿÿÿÿ8éˆ„ä½1
-W
-java:S1948"5Make "secondSelectedClass" transient or serializable.(†¡½Ëşÿÿÿÿ8éˆ„ä½1
+java:S2184Ì"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8é˜¡¾1
 o
-java:S3776`"RRefactor this method to reduce its Cognitive Complexity from 25 to the 15 allowed.(µºš8ˆ‰„ä½1
+java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(µºš8ÿ›¡¾1
 ]
-java:S1161ƒ":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8™‰„ä½1
+java:S1161š":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8ˆœ¡¾1
 _
-java:S1117…"ARename "selectedClass" which hides the field declared at line 15.(—Ç›â8™‰„ä½1
+java:S1117œ"ARename "selectedClass" which hides the field declared at line 16.(—Ç›â8ˆœ¡¾1
 ?
-java:S1116Ó"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8Ç‰„ä½1
+java:S1116‹"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8«œ¡¾1
 >
-java:S1659" Declare "dy" on a separate line.(…ÆõÔ8Ç‰„ä½1
+java:S1659Ë" Declare "dy" on a separate line.(…ÆõÔ8¶œ¡¾1
 b
-java:S1659"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8Ç‰„ä½1
+java:S1659Í"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8·œ¡¾1
 D
-java:S1659‘"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8Ó¯—ä½1
+java:S1659Î"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8¸œ¡¾1
