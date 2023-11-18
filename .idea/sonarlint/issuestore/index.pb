@@ -9,9 +9,9 @@ G
 src/view/MainFrame.java,b\e\be6f60adfe6cd9d6729ebe990d77fefa2ff5226a
 H
 src/model/UMLCanvas.java,b\0\b042133cda7874e07cf1b9b33a0343c782358733
-W
-'src/controller/ClassCreationDialog.java,8\a\8a2dcf66eab7fd0fe2f3171b7169c2b30d105052
 U
 %src/controller/ClassEditorDialog.java,1\9\190194ed9bff94425d6793c2fe0906cfb8a7d545
 J
 src/model/UMLRelation.java,0\6\06be91da2ab25a4bbdbf636b94293391b23ba68f
+´
+ƒsrc/gson-gson-parent-2.10.1/examples/android-proguard-example/src/com/google/gson/examples/android/GsonProguardExampleActivity.java,1\5\155948357aceb7b6702f5ccf600371f0aa2417eb

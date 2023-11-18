@@ -6,11 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UMLCanvas extends JPanel {
-    private final List<UMLClasse> umlClasses;
+public class UMLCanvas extends JPanel implements Serializable   {
+    private List<UMLClasse> umlClasses;
     private List<UMLRelation> umlRelations;
     private UMLClasse selectedClass;
     private Point lastMousePosition;
@@ -26,6 +27,28 @@ public class UMLCanvas extends JPanel {
         this.umlClasses = new ArrayList<>();
         this.umlRelations = new ArrayList<>();
         setupMouseListeners();
+    }
+
+    public void saveSchema(File file) {
+        try (FileOutputStream fileOut = new FileOutputStream(file);
+             ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
+            out.writeObject(umlClasses);
+            out.writeObject(umlRelations);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void loadSchema(String filePath) {
+        try (FileInputStream fileIn = new FileInputStream(filePath);
+             ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            umlClasses = (List<UMLClasse>) in.readObject();
+            umlRelations = (List<UMLRelation>) in.readObject();
+            repaint();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void startCreatingRelation() {

@@ -1,8 +1,8 @@
 package model;
 
-import java.awt.*;
+import java.io.Serializable;
 
-public class UMLRelation {
+public class UMLRelation implements Serializable {
     private UMLClasse source;
     private UMLClasse destination;
     private String sourceCardinality;

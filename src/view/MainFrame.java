@@ -1,12 +1,14 @@
 package view;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.Serializable;
 
 import model.UMLCanvas;
 import model.UMLClasse;
 import controller.ClassEditorDialog;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Serializable {
 
     public MainFrame(String title, UMLCanvas canvas) {
         super(title);
@@ -29,6 +31,32 @@ public class MainFrame extends JFrame {
         JMenuItem deleteClassItem = new JMenuItem("Supprimer une classe");
         deleteClassItem.addActionListener(e -> deleteClass(canvas));
 
+        JMenuItem saveItem = new JMenuItem("Enregistrer");
+        saveItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Enregistrer le schéma");
+
+            fileChooser.setSelectedFile(new File("schema.uml"));
+
+            int userSelection = fileChooser.showSaveDialog(this);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                canvas.saveSchema(fileToSave);
+            }
+        });
+
+        JMenuItem loadItem = new JMenuItem("Charger");
+        loadItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Ouvrir le schéma");
+
+            int userSelection = fileChooser.showOpenDialog(this);
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToLoad = fileChooser.getSelectedFile();
+                canvas.loadSchema(fileToLoad.getAbsolutePath());
+            }
+        });
+
         JMenu editMenu = new JMenu("Édition");
 
         JMenuItem deleteRelationItem = new JMenuItem("Supprimer une relation");
@@ -37,6 +65,8 @@ public class MainFrame extends JFrame {
         JMenuItem createRelationItem = new JMenuItem("Ajouter une relation");
         createRelationItem.addActionListener(e -> canvas.startCreatingRelation());
 
+        fileMenu.add(saveItem);
+        fileMenu.add(loadItem);
         fileMenu.add(createClassItem);
         fileMenu.add(editClassItem);
         fileMenu.add(deleteClassItem);

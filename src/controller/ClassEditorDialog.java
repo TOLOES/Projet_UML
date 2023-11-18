@@ -3,11 +3,12 @@ package controller;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.Serializable;
 
 import model.UMLClasse;
 import model.UMLCanvas;
 
-public class ClassEditorDialog extends JDialog {
+public class ClassEditorDialog extends JDialog implements Serializable {
 
     private final UMLClasse umlClass;
     private final DefaultListModel<String> attributeListModel;
