@@ -28,16 +28,8 @@ public class UMLRelation {
         return source;
     }
 
-    public void setSource(UMLClasse source) {
-        this.source = source;
-    }
-
     public UMLClasse getDestination() {
         return destination;
-    }
-
-    public void setDestination(UMLClasse destination) {
-        this.destination = destination;
     }
 
     public String getSourceCardinality() {

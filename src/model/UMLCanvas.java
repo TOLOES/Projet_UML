@@ -383,6 +383,7 @@ public class UMLCanvas extends JPanel {
         // Dessine la ligne entre les points calculés
         g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
 
+        // Dessin des types de relation
         switch (relation.getType()) {
             case AGGREGATION:
                 drawDiamond(g, endPoint.x, endPoint.y, false); // Losange vide pour l'agrégation
@@ -397,9 +398,13 @@ public class UMLCanvas extends JPanel {
                 break;
         }
 
+        // Calcule les points pour les cardinalités
+        Point midStartPoint = new Point((startPoint.x * 3 + endPoint.x) / 4, (startPoint.y * 3 + endPoint.y) / 4);
+        Point midEndPoint = new Point((endPoint.x * 3 + startPoint.x) / 4, (endPoint.y * 3 + startPoint.y) / 4);
+
         // Dessine les cardinalités
-        drawCardinality(g, startPoint.x, startPoint.y, relation.getSourceCardinality());
-        drawCardinality(g, endPoint.x, endPoint.y, relation.getDestinationCardinality());
+        drawCardinality(g, midStartPoint.x, midStartPoint.y, relation.getSourceCardinality());
+        drawCardinality(g, midEndPoint.x, midEndPoint.y, relation.getDestinationCardinality());
     }
 
     private Point getBorderPoint(UMLClasse umlClass, UMLClasse otherClass, Graphics g) {

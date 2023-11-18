@@ -1,32 +1,32 @@
 
-s	java:S117°"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8…„ä½1
+s	java:S117µ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8Î¼õ¾1
 c
-java:S2184¶"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
+java:S2184¶"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8Ñ¼õ¾1
 c
-java:S2184¶"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8…„ä½1
+java:S2184¶"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8Ñ¼õ¾1
 e
-java:S2184°"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8…„ä½1
+java:S2184µ"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8Ñ¼õ¾1
 I
-java:S1948",Make "umlClasses" transient or serializable.(¹şìç8éˆ„ä½1
+java:S1948",Make "umlClasses" transient or serializable.(¹şìç8Ç½õ¾1
 P
-java:S1948".Make "umlRelations" transient or serializable.(€×Öşÿÿÿÿ8éˆ„ä½1
+java:S1948".Make "umlRelations" transient or serializable.(€×Öşÿÿÿÿ8Ç½õ¾1
 Q
-java:S1948"/Make "selectedClass" transient or serializable.(Ù„Áıÿÿÿÿ8éˆ„ä½1
+java:S1948"/Make "selectedClass" transient or serializable.(Ù„Áıÿÿÿÿ8Ç½õ¾1
 V
-java:S1948"4Make "firstSelectedClass" transient or serializable.(¶Ì»úÿÿÿÿ8éˆ„ä½1
+java:S1948"4Make "firstSelectedClass" transient or serializable.(¶Ì»úÿÿÿÿ8Ç½õ¾1
 W
-java:S1948"5Make "secondSelectedClass" transient or serializable.(†¡½Ëşÿÿÿÿ8éˆ„ä½1
+java:S1948"5Make "secondSelectedClass" transient or serializable.(†¡½Ëşÿÿÿÿ8Ç½õ¾1
 o
-java:S3776`"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(µºš8ˆ‰„ä½1
+java:S3776`"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(µºš8Ñ½õ¾1
 ]
-java:S1161ƒ":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8™‰„ä½1
+java:S1161ƒ":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8Õ½õ¾1
 _
-java:S1117…"ARename "selectedClass" which hides the field declared at line 15.(—Ç›â8™‰„ä½1
+java:S1117…"ARename "selectedClass" which hides the field declared at line 15.(—Ç›â8Ö½õ¾1
 ?
-java:S1116ô"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8Ç‰„ä½1
+java:S1116ô"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8ã½õ¾1
 >
-java:S1659¯" Declare "dy" on a separate line.(…ÆõÔ8Ç‰„ä½1
+java:S1659´" Declare "dy" on a separate line.(…ÆõÔ8ç½õ¾1
 b
-java:S1659±"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8Ç‰„ä½1
+java:S1659¶"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8ç½õ¾1
 D
-java:S1659²"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8Ó¯—ä½1
+java:S1659·"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8è½õ¾1
