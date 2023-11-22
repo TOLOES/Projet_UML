@@ -317,6 +317,10 @@ public class UMLCanvas extends JPanel implements Serializable   {
         return null;
     }
 
+    public List<UMLClasse> getUmlClasses() {
+        return umlClasses;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

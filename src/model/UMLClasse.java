@@ -1,10 +1,11 @@
 package model;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
-public class UMLClasse implements Serializable{
+public class UMLClasse extends JPanel implements Serializable{
     private  int x;
     private  int y;
     private String name;
@@ -18,12 +19,11 @@ public class UMLClasse implements Serializable{
         this.x = x;
         this.y = y;
     }
-
-    public String getName() {
+    @Override public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    @Override public void setName(String name) {
         this.name = name;
     }
 
@@ -38,8 +38,8 @@ public class UMLClasse implements Serializable{
     public void addAttribute(String attribute) {
         attributes.add(attribute);
     }
-    public int getX() { return x; }
-    public int getY() { return y; }
+    @Override public int getX() { return x; }
+    @Override public int getY() { return y; }
     public void setX(int x) { this.x = x; }
     public void setY(int y) { this.y = y; }
 

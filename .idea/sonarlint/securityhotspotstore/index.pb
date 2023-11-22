@@ -13,5 +13,7 @@ U
 %src/controller/ClassEditorDialog.java,1\9\190194ed9bff94425d6793c2fe0906cfb8a7d545
 J
 src/model/UMLRelation.java,0\6\06be91da2ab25a4bbdbf636b94293391b23ba68f
-´
-ƒsrc/gson-gson-parent-2.10.1/examples/android-proguard-example/src/com/google/gson/examples/android/GsonProguardExampleActivity.java,1\5\155948357aceb7b6702f5ccf600371f0aa2417eb
+L
+src/builder/CodeBuilder.java,a\7\a75978a30e42ae3e4a1b580bf898e7eeb00edd04
+P
+ src/builder/JavaCodeBuilder.java,f\6\f65c4ee6c9d323bb77a982f7ae2f4e934a0774d5

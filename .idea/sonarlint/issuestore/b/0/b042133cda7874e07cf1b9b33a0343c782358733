@@ -1,22 +1,22 @@
 
-s	java:S117Ì"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8Ü˜¡¾1
+s	java:S117Ğ"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(×¯°ùÿÿÿÿ8ìº”î¾1
 c
-java:S2184Í"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8æ˜¡¾1
+java:S2184Í"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8ğº”î¾1
 c
-java:S2184Í"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8ç˜¡¾1
+java:S2184Í"ECast one of the operands of this subtraction operation to a "double".(ÊÚ’É8ñº”î¾1
 e
-java:S2184Ì"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8é˜¡¾1
+java:S2184Ğ"BCast one of the operands of this addition operation to a "double".(×¯°ùÿÿÿÿ8ñº”î¾1
 o
-java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(µºš8ÿ›¡¾1
+java:S3776w"RRefactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed.(µºš8Á½”î¾1
 ]
-java:S1161š":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8ˆœ¡¾1
+java:S1161š":Add the "@Override" annotation above this method signature(Ä Ïúüÿÿÿÿ8Í½”î¾1
 _
-java:S1117œ"ARename "selectedClass" which hides the field declared at line 16.(—Ç›â8ˆœ¡¾1
+java:S1117œ"ARename "selectedClass" which hides the field declared at line 16.(—Ç›â8Ï½”î¾1
 ?
-java:S1116‹"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8«œ¡¾1
+java:S1116"Remove this empty statement.(Â™ñ¸ûÿÿÿÿ8ğ½”î¾1
 >
-java:S1659Ë" Declare "dy" on a separate line.(…ÆõÔ8¶œ¡¾1
+java:S1659Ï" Declare "dy" on a separate line.(…ÆõÔ8ö½”î¾1
 b
-java:S1659Í"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8·œ¡¾1
+java:S1659Ñ"?Declare "xn" and all following declarations on a separate line.(ï¨èÇÿÿÿÿÿ8÷½”î¾1
 D
-java:S1659Î"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8¸œ¡¾1
+java:S1659Ò"!Declare "cos" on a separate line.(”¡µµşÿÿÿÿ8÷½”î¾1

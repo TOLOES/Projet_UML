@@ -1,17 +1,21 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.Serializable;
 
+import controller.UMLController;
 import model.UMLCanvas;
 import model.UMLClasse;
 import controller.ClassEditorDialog;
 
 public class MainFrame extends JFrame implements Serializable {
+    private UMLController umlController;
 
     public MainFrame(String title, UMLCanvas canvas) {
         super(title);
+        umlController = new UMLController();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -65,17 +69,36 @@ public class MainFrame extends JFrame implements Serializable {
         JMenuItem createRelationItem = new JMenuItem("Ajouter une relation");
         createRelationItem.addActionListener(e -> canvas.startCreatingRelation());
 
+        JMenuItem generateCodeButton = new JMenuItem("Générer le code");
+        generateCodeButton.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Enregistrer le code Java");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Java Files", "java"));
+
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+                if (!fileToSave.getAbsolutePath().endsWith(".java")) {
+                    fileToSave = new File(fileToSave.getAbsolutePath() + ".java");
+                }
+                umlController.generateJavaCode(canvas, fileToSave);
+            }
+        });
+
         fileMenu.add(saveItem);
         fileMenu.add(loadItem);
         fileMenu.add(createClassItem);
         fileMenu.add(editClassItem);
         fileMenu.add(deleteClassItem);
+        fileMenu.add(generateCodeButton);
         editMenu.add(createRelationItem);
         editMenu.add(deleteRelationItem);
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
         setJMenuBar(menuBar);
     }
+
+
 
     private void createClass(UMLCanvas canvas) {
         String className = JOptionPane.showInputDialog(this, "Nom de la classe:");
@@ -116,5 +139,7 @@ public class MainFrame extends JFrame implements Serializable {
             }
         }
     }
+
+
 }
 
